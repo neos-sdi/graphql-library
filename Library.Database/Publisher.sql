@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Editor]
+﻿CREATE TABLE [dbo].[Publisher]
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL, 
     [Name] NVARCHAR(255) NULL,

@@ -62,7 +62,7 @@
     <Build Include="Book.sql" />
     <Build Include="Author.sql" />
     <Build Include="Serie.sql" />
-    <Build Include="Editor.sql" />
+    <Build Include="Publisher.sql" />
     <Build Include="Language.sql" />
     <Build Include="BookAuthor.sql" />
   </ItemGroup>
