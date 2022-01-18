@@ -13,7 +13,7 @@
 )
 
 GO
-CREATE INDEX [IX_BOOK_EDITOR] ON [dbo].[Book] ([EditorId])
+CREATE INDEX [IX_BOOK_EDITOR] ON [dbo].[Book] ([PublisherId])
 GO
 CREATE INDEX [IX_BOOK_LANGUAGE] ON [dbo].[Book] ([LanguageId])
 GO
