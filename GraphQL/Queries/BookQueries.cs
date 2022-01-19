@@ -1,18 +1,20 @@
 ﻿namespace GraphQL.Queries
 {
+    using Library.Application.Books.Queries;
     using Library.Domain.Entities;
     using Library.Infrastructure;
     using Library.Infrastructure.Extensions;
+    using MediatR;
 
     [ExtendObjectType(OperationTypeNames.Query)]
     public class BookQueries
     {
-        [UseLibraryDb]
+        
         [UseSorting]
-        public IQueryable<Book> GetBooks([ScopedService] LibraryDbContext context) {
+        public async Task<IQueryable<Book>> GetBooks([Service]IMediator mediator) {
             try
             {
-                return context.Books;
+                return await mediator.Send(new GetBooksQuery());
             }
             catch (Exception ex)
             {

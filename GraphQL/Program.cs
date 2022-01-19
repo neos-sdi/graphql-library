@@ -1,6 +1,7 @@
 using GraphQL.Mutations;
 using GraphQL.Queries;
 using HotChocolate.AspNetCore.Voyager;
+using Library.Application;
 using Library.Application.Books.Commands;
 using Library.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,9 @@ void ConfigureServices(IServiceCollection services)
 {
     string connectionString = "server=localhost;user=sa;pwd=P@ssword;database=Library";
     services.AddPooledDbContextFactory<LibraryDbContext>(options => options.UseSqlServer(connectionString));
-    //services.AddDbContext<LibraryDbContext>(options => options.UseSqlServer(connectionString));
+
+    services.AddApplication();
+    services.AddInfrastructure();
 
     services.AddGraphQLServer()
             .AddSorting()
