@@ -26,12 +26,15 @@ app.Run();
 void ConfigureServices(IServiceCollection services)
 {
     string connectionString = "server=localhost;user=sa;pwd=P@ssword;database=Library";
+    //services.AddPooledDbContextFactory<LibraryDbContext>(options => options.UseSqlServer(connectionString));
     services.AddDbContext<LibraryDbContext>(options => options.UseSqlServer(connectionString));
 
     services.AddGraphQLServer()
+            .AddSorting()
             .AddQueryType()
             .AddMutationType()
             .AddTypeExtension<BookQueries>()
-            .AddTypeExtension<BookMutations>();
+            .AddTypeExtension<BookMutations>()
+            ;
 
 }
