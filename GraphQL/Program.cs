@@ -1,5 +1,6 @@
 using GraphQL.Mutations;
 using GraphQL.Queries;
+using HotChocolate.AspNetCore.Voyager;
 using Library.Application.Books.Commands;
 using Library.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,8 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapGraphQL();
 
+    //app.UseVoyager("/graphql", "/graphql-voyager");
+
     endpoints.MapGet("/", context =>
     {
         context.Response.Redirect("/graphql", true);
@@ -26,8 +29,8 @@ app.Run();
 void ConfigureServices(IServiceCollection services)
 {
     string connectionString = "server=localhost;user=sa;pwd=P@ssword;database=Library";
-    //services.AddPooledDbContextFactory<LibraryDbContext>(options => options.UseSqlServer(connectionString));
-    services.AddDbContext<LibraryDbContext>(options => options.UseSqlServer(connectionString));
+    services.AddPooledDbContextFactory<LibraryDbContext>(options => options.UseSqlServer(connectionString));
+    //services.AddDbContext<LibraryDbContext>(options => options.UseSqlServer(connectionString));
 
     services.AddGraphQLServer()
             .AddSorting()
