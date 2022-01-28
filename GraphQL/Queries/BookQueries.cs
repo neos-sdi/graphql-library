@@ -23,5 +23,9 @@
             }
         }
         
+        public async Task<Book> GetBook([Service]IMediator mediator, Guid id)
+        {
+            return await mediator.Send(new GetBookByIdQuery(id));
+        }
     }
 }

@@ -1,28 +1,20 @@
 ﻿namespace GraphQL.Mutations
 {
     using Library.Application.Books.Commands;
+    using Library.Domain.Common;
     using Library.Domain.Entities;
-    using Library.Infrastructure;
+
+    using MediatR;
 
     [ExtendObjectType(OperationTypeNames.Mutation)]
     public class BookMutations
     {
-        public async Task<AddBookPayload> AddBookAsync(
+        public async Task<Payload<Book>> AddBookAsync(
         AddBookCommand input,
-        [Service] LibraryDbContext context,
+        [Service] IMediator mediator,
         CancellationToken cancellationToken)
         {
-            var book = new Book
-            {
-                Id = Guid.NewGuid(),
-                Title = input.Title,
-                Description = input.Description
-            };
-
-            context.Books.Add(book);
-            await context.SaveChangesAsync();
-
-            return new AddBookPayload(book);
+            return await mediator.Send(input, cancellationToken);
         }
     }
 }

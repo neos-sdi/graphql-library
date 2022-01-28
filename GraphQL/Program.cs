@@ -4,6 +4,7 @@ using HotChocolate.AspNetCore.Voyager;
 using Library.Application;
 using Library.Application.Books.Commands;
 using Library.Infrastructure;
+using Library.Infrastructure.ExtendedTypes;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +42,8 @@ void ConfigureServices(IServiceCollection services)
             .AddMutationType()
             .AddTypeExtension<BookQueries>()
             .AddTypeExtension<BookMutations>()
-            ;
+            .AddTypeExtension<AuthorQueries>()
+            .AddType<BookType>()
+            .AddDataLoaders();
 
 }

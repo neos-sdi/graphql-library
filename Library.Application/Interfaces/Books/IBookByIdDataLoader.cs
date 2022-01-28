@@ -1,5 +1,6 @@
-﻿namespace Library.Application.Interfaces
+﻿namespace Library.Application.Interfaces.Books
 {
+    using GreenDonut;
     using Library.Domain.Entities;
     using System;
     using System.Collections.Generic;
@@ -7,9 +8,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface IBookRepository
+    public interface IBookByIdDataLoader : IDataLoader<Guid, Book>
     {
-        Task<IQueryable<Book>> GetBooks();
-
     }
 }

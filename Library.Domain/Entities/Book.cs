@@ -2,11 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    public class Book
+    public class Book : IEntity
     {
         public Guid Id { get; set; }
         public string? Title { get; set; }
