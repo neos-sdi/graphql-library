@@ -1,10 +1,10 @@
 using GraphQL.Mutations;
 using GraphQL.Queries;
-using HotChocolate.AspNetCore.Voyager;
+
 using Library.Application;
-using Library.Application.Books.Commands;
 using Library.Infrastructure;
 using Library.Infrastructure.ExtendedTypes;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +30,7 @@ app.Run();
 
 void ConfigureServices(IServiceCollection services)
 {
-    string connectionString = "server=localhost;user=sa;pwd=P@ssword;database=Library";
+    var connectionString = "server=localhost;user=sa;pwd=P@ssword;database=Library";
     services.AddPooledDbContextFactory<LibraryDbContext>(options => options.UseSqlServer(connectionString));
 
     services.AddApplication();
@@ -44,6 +44,8 @@ void ConfigureServices(IServiceCollection services)
             .AddTypeExtension<BookMutations>()
             .AddTypeExtension<AuthorQueries>()
             .AddType<BookType>()
-            .AddDataLoaders();
+            .AddDataLoaders()
+            .AddProjections()
+            .AddFiltering();
 
 }

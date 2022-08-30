@@ -1,18 +1,21 @@
 ﻿namespace Library.Infrastructure.DataLoaders
 {
-    using GreenDonut;
-    using Library.Application.Interfaces.Books;
-    using Library.Domain.Entities;
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
-    public class BookByIdDataLoader: BatchDataLoader<Guid, Book>, IBookByIdDataLoader
+    using GreenDonut;
+
+    using Library.Application.Interfaces.Books;
+    using Library.Domain.Entities;
+
+    using Microsoft.EntityFrameworkCore;
+
+    public class BookByIdDataLoader : BatchDataLoader<Guid, Book>, IBookByIdDataLoader
     {
         private readonly IDbContextFactory<LibraryDbContext> _dbContextFactory;
+
 
         public BookByIdDataLoader(
         IDbContextFactory<LibraryDbContext> dbContextFactory,

@@ -18,8 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Languages\" />
-    <Folder Include="Interfaces\Series\" />
     <Folder Include="Languages\" />
     <Folder Include="Series\" />
     <Folder Include="Publishers\" />

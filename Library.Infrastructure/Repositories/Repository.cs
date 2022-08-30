@@ -35,7 +35,7 @@ public class Repository<T> : IAsyncDisposable, IRepository<T> where T : class, I
 
     public IQueryable<T> GetAllAsync()
     {
-        return _context.Set<T>().AsQueryable().AsNoTracking();
+        return _context.Set<T>().AsNoTracking();
     }
 
     public async Task UpdateAsync(T entity, CancellationToken cancellationToken)

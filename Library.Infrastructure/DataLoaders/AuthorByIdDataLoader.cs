@@ -1,16 +1,17 @@
 ﻿namespace Library.Infrastructure.DataLoaders
 {
-    using GreenDonut;
-    using Library.Application.Interfaces.Authors;
-    using Library.Domain.Entities;
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
-    public class AuthorByIdDataLoader : BatchDataLoader<Guid, Author>, IAuthorByIdDataLoader
+    using GreenDonut;
+
+    using Library.Domain.Entities;
+
+    using Microsoft.EntityFrameworkCore;
+
+    public class AuthorByIdDataLoader : BatchDataLoader<Guid, Author>
     {
         private readonly IDbContextFactory<LibraryDbContext> _dbContextFactory;
 
@@ -31,9 +32,9 @@
             await using var dbContext =
                 await _dbContextFactory.CreateDbContextAsync(cancellationToken);
 
-            return await dbContext.Authors
+            return dbContext.Authors
                 .Where(s => keys.Contains(s.Id))
-                .ToDictionaryAsync(t => t.Id, cancellationToken);
+                .ToDictionary(t => t.Id);
         }
     }
 }

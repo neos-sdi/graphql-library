@@ -3,7 +3,6 @@
     using HotChocolate.Execution.Configuration;
 
     using Library.Application.Interfaces;
-    using Library.Application.Interfaces.Authors;
     using Library.Application.Interfaces.Books;
     using Library.Domain.Entities;
     using Library.Infrastructure.DataLoaders;
@@ -37,7 +36,7 @@
         public static IRequestExecutorBuilder AddDataLoaders(this IRequestExecutorBuilder builder)
         {
             builder.AddDataLoader<IBookByIdDataLoader, BookByIdDataLoader>();
-            builder.AddDataLoader<IAuthorByIdDataLoader, AuthorByIdDataLoader>();
+            builder.AddDataLoader<AuthorByIdDataLoader>();
 
             return builder;
         }
