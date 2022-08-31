@@ -2,11 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    public class Author
+    public class Author : IEntity
     {
         public Guid Id { get; set; }
 
@@ -15,5 +12,7 @@
         public string? LastName { get; set; }
 
         public ICollection<Book> WrittenBooks { get; set; } = new List<Book>();
+
+        //public ICollection<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
     }
 }
