@@ -1,14 +1,15 @@
 ﻿namespace Library.Application.Authors.Commands;
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
 using Library.Application.Interfaces;
 using Library.Domain.Common;
 using Library.Domain.Entities;
+using Library.Domain.Errors;
 
 using MediatR;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 public record AddAuthorCommand(string FirstName, string LastName) : IRequest<Payload<Author>>;
 
@@ -35,7 +36,7 @@ public class AddAuthorCommandHandler : IRequestHandler<AddAuthorCommand, Payload
     {
         if (string.IsNullOrWhiteSpace(request.LastName))
         {
-            return new Payload<Author>(new UserError("An author must have a last name", "A001"));
+            return new Payload<Author>(new UserError("An author must have a last name", (int)AuthorErrors.MustHaveName));
         }
 
         var author = new Author

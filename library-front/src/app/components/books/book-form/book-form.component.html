@@ -1,0 +1,14 @@
+<form [formGroup]="formGroup">
+  <div class="field">
+    <label for="title">Titre</label>
+    <input id="title"  class="w-full" formControlName="title" type="text" pInputText />
+  </div>
+  <div class="field">
+    <label for="description">Description</label>
+    <textarea pInputTextarea id="description" class="w-full" formControlName="description" type="text"></textarea>
+  </div>
+  <div class="flex justify-content-end">
+    <button pButton label="Annuler" class="mr-2" (click)="cancel()"></button>
+    <button pButton label="Enregistrer" (click)="save()"></button>
+  </div>
+</form>

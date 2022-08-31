@@ -1,16 +1,16 @@
 ﻿namespace Library.Infrastructure.Repositories;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
 using Library.Application.Interfaces;
 using Library.Domain.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
 public class Repository<T> : IAsyncDisposable, IRepository<T> where T : class, IEntity
 {
-    private readonly LibraryDbContext _context;
+    protected readonly LibraryDbContext _context;
 
     public Repository(LibraryDbContext context)
     {
@@ -42,5 +42,17 @@ public class Repository<T> : IAsyncDisposable, IRepository<T> where T : class, I
     {
         _context.Update<T>(entity);
         await _context.SaveChangesAsync();
+    }
+
+    public virtual async Task<Guid> RemoveAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var existing = await FindByIdAsync(id, cancellationToken);
+        if (existing == null)
+        {
+            return Guid.Empty;
+        }
+        _context.Remove(existing);
+        await _context.SaveChangesAsync(cancellationToken);
+        return id;
     }
 }

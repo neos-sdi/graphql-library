@@ -15,5 +15,7 @@
         public Language? Language { get; set; }
         public Publisher? Publisher { get; set; }
         public Serie? Serie { get; set; }
+
+        //public ICollection<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
     }
 }

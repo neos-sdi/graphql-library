@@ -1,14 +1,15 @@
 ﻿namespace Library.Application.Books.Commands;
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
 using Library.Application.Interfaces;
 using Library.Domain.Common;
 using Library.Domain.Entities;
+using Library.Domain.Errors;
 
 using MediatR;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 public record AddBookCommand(string Title, string? Description) : IRequest<Payload<Book>>;
 
@@ -36,7 +37,7 @@ public class AddBookCommandHandler : IRequestHandler<AddBookCommand, Payload<Boo
     {
         if (string.IsNullOrWhiteSpace(request.Title))
         {
-            return new Payload<Book>(new UserError("A book must have a title.", "B001"));
+            return new Payload<Book>(new UserError("A book must have a title.", (int)BookErrors.MustHaveTitle));
         }
 
         var book = new Book

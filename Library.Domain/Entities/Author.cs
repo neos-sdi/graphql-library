@@ -12,5 +12,7 @@
         public string? LastName { get; set; }
 
         public ICollection<Book> WrittenBooks { get; set; } = new List<Book>();
+
+        //public ICollection<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
     }
 }

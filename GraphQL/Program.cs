@@ -8,9 +8,17 @@ using Library.Infrastructure.ExtendedTypes;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(p =>
+{
+    p.AddPolicy("cors", builder =>
+    {
+        builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+    });
+});
+
 ConfigureServices(builder.Services);
 var app = builder.Build();
-
+app.UseCors("cors");
 app.UseRouting();
 
 app.UseEndpoints(endpoints =>

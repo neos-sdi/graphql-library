@@ -15,7 +15,7 @@
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddTransient<IRepository<Book>>(service => new Repository<Book>(
+            services.AddTransient<IRepository<Book>>(service => new BookRepository(
                 service.GetRequiredService<IDbContextFactory<LibraryDbContext>>().CreateDbContext()));
 
             services.AddTransient<IRepository<Author>>(service => new Repository<Author>(

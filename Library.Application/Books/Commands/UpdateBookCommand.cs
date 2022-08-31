@@ -1,15 +1,16 @@
 ﻿namespace Library.Application.Books.Commands;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
 using HotChocolate;
 
 using Library.Application.Interfaces;
 using Library.Domain.Common;
 using Library.Domain.Entities;
+using Library.Domain.Errors;
 
 using MediatR;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 public record UpdateBookCommand(Guid Id, Optional<string?> Title, Optional<string?> Description) : IRequest<Payload<Book>>;
 
@@ -37,7 +38,7 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Paylo
         var existingBook = await _repository.FindByIdAsync(request.Id, cancellationToken);
         if (existingBook == null)
         {
-            return new Payload<Book>(new UserError($"Unable to find book. Id:{ request.Id}", "B002"));
+            return new Payload<Book>(new UserError($"Unable to find book. Id:{ request.Id}", (int)BookErrors.NotFound));
         }
 
         if (request.Title.HasValue)

@@ -1,9 +1,9 @@
 ﻿namespace Library.Application.Interfaces;
+using Library.Domain.Entities;
+
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-
-using Library.Domain.Entities;
 
 public interface IRepository<T> where T : class, IEntity
 {
@@ -14,4 +14,6 @@ public interface IRepository<T> where T : class, IEntity
     Task UpdateAsync(T entity, CancellationToken cancellationToken);
 
     Task<T?> FindByIdAsync(Guid id, CancellationToken cancellationToken);
+
+    Task<Guid> RemoveAsync(Guid id, CancellationToken cancellationToken);
 }

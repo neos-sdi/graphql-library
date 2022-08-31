@@ -16,5 +16,22 @@
         {
             return await mediator.Send(input, cancellationToken);
         }
+
+        public async Task<Payload<Book>> UpdateBookAsync(
+        UpdateBookCommand input,
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+        {
+            return await mediator.Send(input, cancellationToken);
+        }
+
+        public async Task<Payload<Guid>> DeleteBookAsync(
+            Guid id,
+            [Service] IMediator mediator,
+            CancellationToken cancellationToken
+            )
+        {
+            return await mediator.Send(new DeleteBookCommand(id), cancellationToken);
+        }
     }
 }
